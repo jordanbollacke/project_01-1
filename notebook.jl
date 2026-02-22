@@ -114,7 +114,7 @@ begin
 	
 	Ω = w_fast   # or Ω_slow
 	sol = sol_fast
-	
+	h1 = 0.2
     number_frames = 200
     time_values = range(sol.t[1], sol.t[end], length=number_frames)
 
@@ -149,22 +149,23 @@ begin
         # ----------------------
         # Panel 3: Pendulum Motion
         # ----------------------
+		
 		# Origin (rotation axis)
 		origin_x = 0.0
-		origin_z = 0.0
+		origin_z = h1
         # Pivot position (rotating frame)
         pivot_x = R*cos(Ω*time_value)
         pivot_y = R*sin(Ω*time_value)
-		pivot_z = 0.0
+		pivot_z = h1
         # Bob position
         bob_x = (R + l*sin(θ))*cos(Ω*time_value)
         bob_y = (R + l*sin(θ))*sin(Ω*time_value)
-        bob_z = -l*cos(θ)
+        bob_z = h1 -l*cos(θ)
 
         # Create plot
 		p3 = plot(
 		    xlims=(-0.3,0.3),
-		    ylims=(-0.3,0.1),
+		    ylims=(-0.3,0.3),
 		    aspect_ratio=:equal,
 		    legend=false,
 		    title="Spinning Frame + Pendulum"
